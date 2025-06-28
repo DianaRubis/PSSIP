@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вторая страница</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1>Вторая страница</h1>
+            <p>Дополнительная информация и формы</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <a href="ЛР1-3_1.html">Главная</a>
+            <a href="#table">Таблица</a>
+            <a href="#video">Видео</a>
+            <a href="#forms">Формы</a>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section id="table">
+            <h2>Пример таблицы с технологиями</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Технология</th>
+                        <th>Использование</th>
+                        <th>Уровень владения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HTML5</td>
+                        <td>Структура веб-страниц</td>
+                        <td>Эксперт</td>
+                    </tr>
+                    <tr>
+                        <td>CSS3</td>
+                        <td>Стилизация веб-страниц</td>
+                        <td>Эксперт</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>Интерактивность</td>
+                        <td>Продвинутый</td>
+                    </tr>
+                    <tr>
+                        <td>React</td>
+                        <td>Фронтенд-разработка</td>
+                        <td>Средний</td>
+                    </tr>
+                    <tr>
+                        <td>Node.js</td>
+                        <td>Бэкенд-разработка</td>
+                        <td>Начальный</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="video">
+            <h2>Видео</h2>
+            <div class="video-container">
+                <iframe 
+                    src="things/video1.mov" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+        
+        <section id="forms">
+            <h2>Различные поля ввода</h2>
+            
+            <form id="advanced-form">
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Введите номер телефона">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" placeholder="Введите пароль">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Введите email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Дата:</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="color">Выберите цвет:</label>
+                    <input type="color" id="color" name="color" value="#ff0000">
+                </div>
+                
+                <div class="form-group">
+                    <label>Выберите навыки (мультивыбор):</label>
+                    <select id="skills" name="skills" multiple>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JavaScript</option>
+                        <option value="react">React</option>
+                        <option value="node">Node.js</option>
+                    </select>
+                    <small>Для выбора нескольких вариантов удерживайте Ctrl (Windows) или Command (Mac)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Выберите варианты (чекбоксы):</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="option1" name="options" value="1">
+                        <label for="option1">Вариант 1</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="option2" name="options" value="2">
+                        <label for="option2">Вариант 2</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="option3" name="options" value="3">
+                        <label for="option3">Вариант 3</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="file">Загрузите файл:</label>
+                    <input type="file" id="file" name="file">
+                </div>
+                
+                <div class="form-group">
+                    <label for="comments">Комментарии:</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Введите ваш комментарий"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn">Отправить</button>
+                    <button type="reset" class="btn btn-secondary">Сбросить</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Мой сайт-визитка. Все права защищены.</p>
+            <p><a href="ЛР1-3_1.html">Вернуться на главную</a></p>
+        </div>
+    </footer>
+</body>
+</html>

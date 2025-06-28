@@ -1,0 +1,83 @@
+body {
+    margin: 0; /* Убираем отступы по умолчанию */
+ 
+}
+
+.box {
+    display: flex;
+    align-items: center; 
+    width: 1200px; /* Фиксированная ширина вместо 100% */
+    margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.one {
+    background-color: rgb(99, 223, 121);
+    width: 1200px; /* Фиксированная ширина */
+    justify-content: space-between; 
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; 
+    position: sticky;
+    top: 0;
+    height: 60px; /* Фиксированная высота */
+}
+
+.three {
+    display: flex; 
+    gap: 10px; 
+}
+
+.four {
+    height: 85px;
+    width: 1200px; /* Фиксированная ширина */
+    background-color: rgb(113, 139, 233);
+    
+    justify-content: space-around;
+}
+
+.five {
+    width: 300px; 
+    background-color: rgb(226, 157, 72);
+    height: 250px;
+    margin-left:83px;
+    justify-content: space-between;
+    flex-direction: column; /* Заменяем flex-flow: column */
+}
+
+.six {
+    width: 1200px; /* Фиксированная ширина */
+    background-color: rgb(159, 224, 241);
+   
+    justify-content: center;
+    height: 140px;
+}
+
+.seven {
+    width: 1200px; /* Фиксированная ширина */
+    background-color: rgb(241, 159, 220);
+   
+    justify-content: center;  
+    flex-direction: column;    
+    align-items: flex-end; 
+    height: 200px; /* Фиксированная высота */
+}
+
+.eight {
+    width: 1200px; /* Фиксированная ширина */
+    background-color: rgb(141, 18, 175);
+    
+    justify-content: center; 
+    margin-top: auto;
+    height: 40px;
+   
+}
+
+.item {
+    width: 100px; /* Фиксированная ширина элементов */
+    height: 50px; /* Фиксированная высота элементов */
+    padding: 15px;
+    border: 1px solid black; 
+    box-sizing: border-box; /* Учитываем padding в ширине/высоте */
+}

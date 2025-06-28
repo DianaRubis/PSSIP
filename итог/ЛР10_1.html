@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Способ 1 - Встроенный JS</title>
+    <script>
+        function showHour() {
+            const date = new Date();
+            alert("Текущий час: " + date.getHours());
+        }
+    </script>
+     <script src="script.js" defer></script>
+</head>
+<body onload="checkAge()">
+    <body>
+    <button onclick="showHour()">Показать год</button>
+
+    <h2>Калькулятор функции y = (√x - 2)/(x - 1)</h2>
+    
+    <button onclick="calculateAndShow()">Рассчитать</button>
+    
+    <div id="result" class="result"></div>
+   <script>
+    //Задание2
+        const n = 3; 
+        const fullName = "Рубис Диана"; 
+        
+        for (let i = 0; i < n + 5; i++) {
+            document.write(fullName + "<br>");
+        }
+   
+
+
+
+
+        // Задание 3
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+        
+        // Произведение нечетных элементов
+        let product = 1;
+        for (let num of arr) {
+            if (num % 2 !== 0) {
+                product *= num;
+            }
+        }
+        
+        // Перевернутый массив
+        const reversedArr = [...arr].reverse();
+        
+        // Вывод результатов
+        document.write("Исходный массив: " + arr.join(", ") + "<br>");
+        document.write("Произведение нечетных: " + product + "<br>");
+        document.write("Перевернутый массив: " + reversedArr.join(", "));
+
+        //Задание 4
+         function calculateAndShow() {
+            const input = prompt("Введите значение x:");
+            const x = parseFloat(input);
+            
+            if (isNaN(x)) {
+                alert("Пожалуйста, введите число!");
+                return;
+            }
+            
+            const result = calculate(x);
+            const resultElement = document.getElementById('result');
+            
+            if (result !== null) {
+                resultElement.innerHTML = `При x = ${x}, y = ${result}`;
+            } else {
+                resultElement.innerHTML = "Расчет не выполнен из-за ошибки";
+            }
+        }
+
+        const stringResult = document.createElement('div');
+    const s1 = "Рубис";
+    const s2 = "Улица янки купала 15";
+    
+    stringResult.innerHTML = `
+        1. Длина S2: ${s2.length}<br>
+        2. Сцепление: ${s1 + " " + s2}<br>
+        3. S2 в нижнем регистре: ${s2.toLowerCase()}
+    `;
+    
+    document.body.appendChild(stringResult);
+    </script>
+    <a href="ЛР12.html">След страница по ЛР</a>
+</body>
+</body>
+</html>

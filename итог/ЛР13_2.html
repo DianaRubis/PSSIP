@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма с валидацией</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .form-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52,152,219,0.5);
+        }
+        
+        .radio-group, .checkbox-group {
+            margin: 10px 0;
+        }
+        
+        .radio-group label, .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        button, .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        button[type="submit"] {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .button {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .captcha-image {
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #f5f5f5;
+        }
+        
+        /* Стили для валидации */
+        .error {
+            border-color: #e74c3c !important;
+            animation: shake 0.5s;
+        }
+        
+        .success {
+            border-color: #2ecc71 !important;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-section">
+        <h2>Форма регистрации</h2>
+        <p>Поля, отмеченные <span class="required"></span>, обязательны для заполнения.</p>
+        
+        <form id="registrationForm">
+            <!-- Фамилия -->
+            <div class="form-group">
+                <label for="lastName" class="required">Фамилия</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Введите фамилию" 
+                       maxlength="30" data-minlength="2">
+                <div class="error-message" id="lastNameError"></div>
+            </div>
+            
+            <!-- Имя -->
+            <div class="form-group">
+                <label for="firstName" class="required">Имя</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Введите имя" 
+                       maxlength="25" data-minlength="2">
+                <div class="error-message" id="firstNameError"></div>
+            </div>
+            
+            <!-- Отчество -->
+            <div class="form-group">
+                <label for="middleName">Отчество</label>
+                <input type="text" id="middleName" name="middleName" placeholder="Введите отчество (если есть)" 
+                       maxlength="30">
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="noMiddleName"> У меня нет отчества</label>
+                </div>
+            </div>
+            
+            <!-- Пол -->
+            <div class="form-group">
+                <label class="required">Пол</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male"> Мужской</label>
+                    <label><input type="radio" name="gender" value="female"> Женский</label>
+                </div>
+                <div class="error-message" id="genderError"></div>
+            </div>
+            
+            <!-- Дата рождения -->
+            <div class="form-group">
+                <label for="birthDate" class="required">Дата рождения</label>
+                <input type="date" id="birthDate" name="birthDate">
+                <div class="error-message" id="birthDateError"></div>
+            </div>
+            
+            <!-- Капча -->
+            <div class="form-group">
+                <label for="captcha" class="required">Введите код с картинки</label>
+                <div class="captcha-container">
+                    <div class="captcha-image">5bgepW</div>
+                    <button type="button" id="refreshCaptcha">Обновить</button>
+                </div>
+                <input type="text" id="captcha" name="captcha" placeholder="Введите код" maxlength="6">
+                <div class="error-message" id="captchaError"></div>
+            </div>
+            
+            <!-- Кнопки -->
+            <div class="buttons">
+                <button type="submit">Отправить</button>
+                <a href="ЛР13_1.html" class="button">Вернуться</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const noMiddleNameCheckbox = document.getElementById('noMiddleName');
+            const middleNameInput = document.getElementById('middleName');
+            const refreshCaptchaBtn = document.getElementById('refreshCaptcha');
+            
+            // Обработка чекбокса "Нет отчества"
+            noMiddleNameCheckbox.addEventListener('change', function() {
+                middleNameInput.disabled = this.checked;
+                if (this.checked) {
+                    middleNameInput.value = '';
+                    middleNameInput.classList.remove('error');
+                }
+            });
+            
+            // Обновление капчи (заглушка)
+            refreshCaptchaBtn.addEventListener('click', function() {
+                alert('Капча обновлена! В реальном приложении здесь бы генерировался новый код.');
+            });
+            
+            // Валидация формы при отправке
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = validateForm();
+                
+                if (isValid) {
+                    alert('Форма успешно отправлена!');
+                    form.reset();
+                    highlightValidFields();
+                }
+            });
+            
+            // Валидация при вводе (live validation)
+            const inputs = form.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+            });
+            
+            // Функция валидации всего формы
+            function validateForm() {
+                let isValid = true;
+                
+                // Проверка обязательных текстовых полей
+                const requiredTextInputs = [
+                    { id: 'lastName', name: 'Фамилия', minLength: 2, maxLength: 30 },
+                    { id: 'firstName', name: 'Имя', minLength: 2, maxLength: 25 },
+                    { id: 'captcha', name: 'Капча', exactValue: '5bgepW' }
+                ];
+                
+                requiredTextInputs.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    if (!validateField(input, field)) {
+                        isValid = false;
+                    }
+                });
+                
+                // Проверка пола
+                const genderSelected = form.querySelector('input[name="gender"]:checked');
+                if (!genderSelected) {
+                    document.getElementById('genderError').textContent = 'Выберите пол';
+                    document.getElementById('genderError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('genderError').style.display = 'none';
+                }
+                
+                // Проверка даты рождения
+                const birthDate = document.getElementById('birthDate');
+                if (!birthDate.value) {
+                    document.getElementById('birthDateError').textContent = 'Введите дату рождения';
+                    document.getElementById('birthDateError').style.display = 'block';
+                    birthDate.classList.add('error');
+                    isValid = false;
+                } else {
+                    const birthDateObj = new Date(birthDate.value);
+                    const today = new Date();
+                    let age = today.getFullYear() - birthDateObj.getFullYear();
+                    const monthDiff = today.getMonth() - birthDateObj.getMonth();
+                    
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+                        age--;
+                    }
+                    
+                    if (age < 18) {
+                        document.getElementById('birthDateError').textContent = 'Вам должно быть не менее 18 лет';
+                        document.getElementById('birthDateError').style.display = 'block';
+                        birthDate.classList.add('error');
+                        isValid = false;
+                    } else {
+                        document.getElementById('birthDateError').style.display = 'none';
+                        birthDate.classList.remove('error');
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Функция валидации отдельного поля
+            function validateField(input, options = {}) {
+                const errorElement = document.getElementById(`${input.id}Error`);
+                let isValid = true;
+                let errorMessage = '';
+                
+                // Проверка на заполненность
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    errorMessage = 'Поле обязательно для заполнения';
+                    isValid = false;
+                }
+                // Проверка минимальной длины
+                else if (options.minLength && input.value.trim().length < options.minLength) {
+                    errorMessage = `Минимальная длина: ${options.minLength} символа`;
+                    isValid = false;
+                }
+                // Проверка максимальной длины
+                else if (options.maxLength && input.value.trim().length > options.maxLength) {
+                    errorMessage = `Максимальная длина: ${options.maxLength} символов`;
+                    isValid = false;
+                }
+                // Проверка точного значения (для капчи)
+                else if (options.exactValue && input.value.trim() !== options.exactValue) {
+                    errorMessage = 'Неверное значение';
+                    isValid = false;
+                }
+                // Проверка формата для имени/фамилии (только буквы)
+                else if ((input.id === 'lastName' || input.id === 'firstName' || input.id === 'middleName') && 
+                         input.value.trim() && !/^[а-яА-ЯёЁa-zA-Z\-]+$/.test(input.value.trim())) {
+                    errorMessage = 'Допустимы только буквы и дефис';
+                    isValid = false;
+                }
+                
+                // Визуальная обратная связь
+                if (!isValid) {
+                    input.classList.add('error');
+                    errorElement.textContent = errorMessage;
+                    errorElement.style.display = 'block';
+                } else {
+                    input.classList.remove('error');
+                    errorElement.style.display = 'none';
+                    
+                    // Если поле прошло валидацию и не пустое
+                    if (input.value.trim()) {
+                        input.classList.add('success');
+                        setTimeout(() => input.classList.remove('success'), 2000);
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Подсветка всех валидных полей
+            function highlightValidFields() {
+                const inputs = form.querySelectorAll('input');
+                inputs.forEach(input => {
+                    if (input.value.trim() && !input.classList.contains('error')) {
+                        input.classList.add('success');
+                        setTimeout(() => input.classList.remove('success'), 2000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

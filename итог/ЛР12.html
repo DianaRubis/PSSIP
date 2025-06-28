@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контрольная работа - Вариант 14</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        
+        #myLink {
+            transition: all 0.3s ease;
+        }
+        
+        #node2:hover {
+            color: green !important;
+            text-decoration: none !important;
+            font-size: 200% !important;
+        }
+    </style>
+</head>
+<body>
+    <a href="ЛР13_1.html">След страница по ЛР</a>
+    <!-- Задание 1 -->
+    <p id="node1">Рубис Диана Денисовна</p>
+    <a id="node2" href="https://www.google.com" id="myLink" target="_blank">Мой любимый сайт - Google</a>
+    <div id="node3">
+        <img src="card.jpg" alt="Пример изображения">
+    </div>
+
+    <script>
+        // Задание 2
+        setTimeout(function() {
+            // 2.1 - Получение ширины документа
+            const docWidth = document.documentElement.scrollWidth;
+            console.log("Ширина документа: " + docWidth + "px");
+            
+            // 2.2 - Вывод информации о ширине
+            const widthInfo = document.createElement('p');
+            widthInfo.textContent = `Ширина документа: ${docWidth}px`;
+            document.body.appendChild(widthInfo);
+            
+            // 2.3 - Копирование узла №3 и вставка после узла №1
+            const node1 = document.getElementById('node1');
+            const node3 = document.getElementById('node3');
+            const node3Copy = node3.cloneNode(true);
+            node1.parentNode.insertBefore(node3Copy, node1.nextSibling);
+            
+        }, 5000);
+
+        // Задание 3 реализовано в CSS через :hover
+
+
